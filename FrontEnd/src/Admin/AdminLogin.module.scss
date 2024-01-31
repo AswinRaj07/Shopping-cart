@@ -1,0 +1,35 @@
+.productPage {
+    padding: 1rem;
+    margin-top: 9rem;
+  
+    .container {
+      position: relative;
+      left: 40rem;
+
+      div{
+        padding:10px;
+      }
+      input{
+        // border: none;
+        outline: none;
+        font-size: 1.1 rem;
+        border-bottom: 1px solid;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        padding:10px;
+        width: 16rem;
+     }
+     button{
+      margin-top: 25px;
+      padding: 10px;
+      width: 17.5rem;
+      color: white;
+      font-weight: 400;
+      font-size: large;
+      background-color: #213547;
+     }
+     
+    
+    }
+  }
