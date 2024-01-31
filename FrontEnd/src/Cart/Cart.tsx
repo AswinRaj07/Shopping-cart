@@ -13,6 +13,16 @@ interface CartProduct {
 const Cart: FunctionComponent = () => {
   const [cartProduct, setCartProduct] = useState<CartProduct[]>([]);
   const [userName, setUserName] = useState<string>(""); 
+  const [total, settotal] = useState()
+
+  const [finaldata, setdata] = useState({
+    
+    productid: '',
+    customerid: localStorage.getItem("userid"),
+    count: 1,
+    Totalprice: total,
+  });
+
   //  const user =localStorage.getItem('email')
   useEffect(() => {
    
@@ -69,8 +79,23 @@ const Cart: FunctionComponent = () => {
               <img src={product.imagePath} alt={product.name}/>
               <h3>{product.name}</h3>
             </div>
+
           </div>)})}
         </div>
+        <label>Qty:</label>
+              <select
+                name="count"
+                onChange={(e) => {
+                  setdata({ ...finaldata, count: e.target.value });
+                }}
+              >
+                <option value="1">1 </option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        <h1>Total Price {total}</h1>
       </section>
     </div>
   );

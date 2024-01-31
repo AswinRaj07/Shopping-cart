@@ -11,6 +11,7 @@ import AddProducts from "./Admin/AddProducts.tsx";
 import AdminPage from "./Admin/AdminPage.tsx";
 import EditProduct from "./Admin/EditProduct.tsx";
 import Cart from "./Cart/Cart.tsx";
+import Cartcomponent from "./Cart/Cartcomponent.tsx";
 import LogOut from "./Header/LogOut.tsx";
 function App() {
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -37,6 +38,7 @@ function App() {
           <Route path="/adminpage" element={<AdminPage />} />
           <Route path="/editproduct" element={<EditProduct />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cartcomponent" element={<Cartcomponent/>}/>
         </Routes>
       </main>
       <Footer />
