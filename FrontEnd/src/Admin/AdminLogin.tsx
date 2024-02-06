@@ -24,10 +24,17 @@ const AdminLogin: FunctionComponent = () => {
         "http://localhost:5000/api/admin/login",
         login
       );
-      console.log("LoginSucessfull:", response.data);
-      navigate("/adminpage");
+      if(response.data.status == 200){
+        console.log("LoginSucessfull:", response.data);
+        navigate("/adminpage");
+      }
+      else{
+        alert("Email or Password Incorrect!!")
+      }
+     
     } catch (err) {
-      console.log(err);
+      console.log("Login Failed:",err);
+      alert("Email or Password Incorrect!!")
     }
   };
 

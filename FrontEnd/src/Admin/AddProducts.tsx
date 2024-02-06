@@ -6,12 +6,14 @@ interface product {
   name: string;
   price: number;
   imagePath: string;
+  count :number
 }
 const AddProducts: FunctionComponent = () => {
   const [products, setProducts] = useState<product>({
     name: "",
     price: 0,
     imagePath: "",
+    count:0
   });
   console.log(products);
 
@@ -76,6 +78,15 @@ const AddProducts: FunctionComponent = () => {
               onChange={handleInputChnage}
             />
           </div>
+           <div>
+            <input
+              required
+              name="count"
+              placeholder="count"
+              value={products.count}
+              onChange={handleInputChnage}
+            />
+          </div> 
           <div>
             <button type="submit">Add</button>
           </div>

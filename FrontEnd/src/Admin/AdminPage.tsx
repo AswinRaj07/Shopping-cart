@@ -29,15 +29,17 @@ const AdminPage:FunctionComponent = () => {
     }
     const navigate =useNavigate()
     
-    // const deleteFunction =async (id:number)=>{
-    //     try{
+    const deleteFunction =async (id:number)=>{
+        try{
 
-    //         const response = await axios.delete(`http://localhost:5000/api/product/delete/${id}`)
-    //         console.log(response)
-    //     }
-    //     catch(err){
-    //     console.log(err)
-    // }
+            const response = await axios.delete(`http://localhost:5000/api/product/delete/${id}`)
+            console.log(response)
+            window.location.reload()
+        }
+        catch(err){
+        console.log(err)
+    }
+  }
   return (
     <div>
      <section className={productstyl.productPage}>
@@ -54,7 +56,7 @@ const AdminPage:FunctionComponent = () => {
                 <p>price{product.price}</p>
                 <button onClick={()=>navigate("/editproduct",{state:{product}})}>Edit</button> 
                  
-                <button>Remove</button>
+                <button onClick={()=>deleteFunction(product.id)}>Remove</button>
                
               </div>
             );

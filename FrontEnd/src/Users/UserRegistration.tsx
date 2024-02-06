@@ -28,7 +28,7 @@ const UserRegistration: FunctionComponent = () => {
         "http://localhost:5000/api/Users/register",
         register
       );
-      console.log("Register sucess", response.data);
+      console.log( response.data);
     } catch (err) {
       console.log("RegistrationFailed", err);
     }

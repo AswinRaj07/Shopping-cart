@@ -10,37 +10,41 @@ interface LoginFormData {
   password: string;
 }
 
-interface ProductProps {
-  currentUser: any;
-  setCurrentUser: any;
-}
-const Login: FunctionComponent<ProductProps> = ({
-  currentUser,
-  setCurrentUser,
-}) => {
+
+const Login: FunctionComponent = () => {
   const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
-  // const [currentUser,setCurrentUser] =useState<any>(null)
+ 
+  console.log(formData)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const navigate = useNavigate();
+
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/Users/Login",
-        formData
-      );
-      console.log("Login successful:", response.data);
-      setCurrentUser(formData.email);
-      navigate("/");
+      const response = await axios.post( "http://localhost:5000/api/Users/Login",formData,{withCredentials:true});
+      
+      console.log(response.data)
+      // localStorage.setItem("currentUser",response.data.userWithEmail.email)
+      localStorage.setItem("token",response.data.token)
+      if(response.status == 200){
+        navigate("/");
+      }else{
+        alert("Please enter vaid details")
+      }
+      
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed:", error) 
+      window.location.reload
+      alert("Email or Password Incorrect !!")
+     
     }
   };
 
@@ -73,9 +77,7 @@ const Login: FunctionComponent<ProductProps> = ({
           <div>
             <button type="submit">Login</button>
           </div>
-          {/* <div>
-            <Link to="/">Forgot Password?</Link>
-          </div> */}
+         
           <div>
             <p>
               Dont have an account?<Link to="/UserRegisteration">Sign up</Link>

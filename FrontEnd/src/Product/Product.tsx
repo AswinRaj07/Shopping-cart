@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import productstyl from "./Product.module.scss";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 interface Products {
   id: number;
@@ -9,12 +10,13 @@ interface Products {
   imagePath: string;
 }
 
-interface ProductProps {
-  currentUser: any;
-}
-const Product: FunctionComponent<ProductProps> = ({ currentUser }) => {
+const Product: FunctionComponent = () => {
   const [products, setProducts] = useState<Products[]>([]);
   const [array, setArray] = useState<any>([]);
+
+  const navigate = useNavigate();
+  const currentUser = localStorage.getItem("currentUser");
+  console.log(currentUser);
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -28,44 +30,38 @@ const Product: FunctionComponent<ProductProps> = ({ currentUser }) => {
       console.log(err);
     }
   };
-
-  //   const handleButtonClick = async(e:any)=>{
-  //    const response =await fetch("http://localhost:5000/api/product/addTocart",{
-  //           method :"Post",
-  //           headers:{
-  //             'Content-Type' :'application/json'
-  //           },
-  //           body:JSON.stringify({user:currentUser, product: [...array,e]})
-  //    })
-  //    const newArray =await response.json()
-  //    setArray(newArray.cartProduct.product)
-  //    console.log(newArray)
-  // }
-
   const handleButtonClick = async (e: any) => {
     try {
-      const response = await fetch(
+      
+      const response = await axios(
         "http://localhost:5000/api/product/addTocart",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ user: currentUser, product: [...array, e] }),
+          data:{user:currentUser,product :e}
+          
         }
-      );
+       
+      );} catch(err){
+          console.log(err)
+      }}
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  //     if (!response) {
+  //       alert("Please login");
+  //       navigate("/Login");
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
 
-      const newArray = await response.json();
-      setArray(newArray.cartProduct.product);
-      console.log(newArray);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  //     const newArray = await response.json();
+  //     setArray(newArray.cartProduct.product);
+  //     console.log(newArray);
+  //     alert("Product added sucessfull");
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   return (
     <div>
